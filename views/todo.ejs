@@ -94,29 +94,42 @@
         .watch {
             border: 8px solid #4CAF50; /* Green border */
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             display: inline-block;
             position: relative;
         }
-        .digit {
+        .hour, .minute, .second {
             position: absolute;
-            font-size: 14px;
+            background: black;
         }
         .hour {
-            top: 40%;
-            left: 45%;
-            transform: rotateZ(90deg);
+            width: 4px;
+            height: 50px;
+            top: 50px;
+            left: 98px;
+            transform-origin: 50% 100%;
         }
         .minute {
-            top: 25%;
-            left: 45%;
-            transform: rotateZ(90deg);
+            width: 3px;
+            height: 70px;
+            top: 40px;
+            left: 99px;
+            transform-origin: 50% 100%;
         }
         .second {
-            top: 10%;
-            left: 45%;
-            transform: rotateZ(90deg);
+            width: 2px;
+            height: 80px;
+            top: 30px;
+            left: 99px;
+            transform-origin: 50% 100%;
+        }
+        .number {
+            position: absolute;
+            font-size: 14px;
+            top: 20px;
+            left: 100px;
+            transform-origin: 50% 100%;
         }
     </style>
 </head>
@@ -142,9 +155,16 @@
 
     <div class="watch-container">
         <div class="watch">
-            <div class="hour digit" id="hour"></div>
-            <div class="minute digit" id="minute"></div>
-            <div class="second digit" id="second"></div>
+            <!-- Watch numbers -->
+            <% for (var i = 1; i <= 12; i++) { %>
+                <div class="number" style="transform: rotateZ(<%= i * 30 %>deg)">
+                    <%= i %>
+                </div>
+            <% } %>
+            <!-- Watch hands -->
+            <div class="hour" id="hour"></div>
+            <div class="minute" id="minute"></div>
+            <div class="second" id="second"></div>
         </div>
     </div>
 
@@ -157,13 +177,13 @@
             const minute = now.getMinutes();
             const second = now.getSeconds();
 
-            document.getElementById("hour").innerText = padZero(hour);
-            document.getElementById("minute").innerText = padZero(minute);
-            document.getElementById("second").innerText = padZero(second);
-        }
+            const hourDeg = (hour % 12) * 30 + (minute / 60) * 30; // Each hour is 30deg
+            const minuteDeg = minute * 6; // Each minute is 6deg
+            const secondDeg = second * 6; // Each second is 6deg
 
-        function padZero(num) {
-            return (num < 10 ? "0" : "") + num;
+            document.getElementById("hour").style.transform = `rotate(${hourDeg}deg)`;
+            document.getElementById("minute").style.transform = `rotate(${minuteDeg}deg)`;
+            document.getElementById("second").style.transform = `rotate(${secondDeg}deg)`;
         }
     </script>
 </body>
