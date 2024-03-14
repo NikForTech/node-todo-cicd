@@ -99,29 +99,23 @@
             display: inline-block;
             position: relative;
         }
-        .hour, .minute, .second {
+        .digit {
             position: absolute;
-            background: black;
-            border-radius: 50%;
-            width: 4px;
-            height: 4px;
+            font-size: 14px;
         }
         .hour {
-            top: 50%;
-            left: 50%;
-            transform-origin: 50% 100%;
+            top: 40%;
+            left: 45%;
             transform: rotateZ(90deg);
         }
         .minute {
-            top: 10%;
-            left: 50%;
-            transform-origin: 50% 100%;
+            top: 25%;
+            left: 45%;
             transform: rotateZ(90deg);
         }
         .second {
             top: 10%;
-            left: 50%;
-            transform-origin: 50% 100%;
+            left: 45%;
             transform: rotateZ(90deg);
         }
     </style>
@@ -148,9 +142,9 @@
 
     <div class="watch-container">
         <div class="watch">
-            <div class="hour" id="hour"></div>
-            <div class="minute" id="minute"></div>
-            <div class="second" id="second"></div>
+            <div class="hour digit" id="hour"></div>
+            <div class="minute digit" id="minute"></div>
+            <div class="second digit" id="second"></div>
         </div>
     </div>
 
@@ -163,15 +157,14 @@
             const minute = now.getMinutes();
             const second = now.getSeconds();
 
-            const hourDeg = (hour % 12) * 30 + (minute / 60) * 30; // Each hour is 30deg
-            const minuteDeg = minute * 6; // Each minute is 6deg
-            const secondDeg = second * 6; // Each second is 6deg
+            document.getElementById("hour").innerText = padZero(hour);
+            document.getElementById("minute").innerText = padZero(minute);
+            document.getElementById("second").innerText = padZero(second);
+        }
 
-            document.getElementById("hour").style.transform = `rotate(${hourDeg}deg)`;
-            document.getElementById("minute").style.transform = `rotate(${minuteDeg}deg)`;
-            document.getElementById("second").style.transform = `rotate(${secondDeg}deg)`;
+        function padZero(num) {
+            return (num < 10 ? "0" : "") + num;
         }
     </script>
 </body>
 </html>
-
