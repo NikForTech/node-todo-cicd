@@ -127,9 +127,6 @@
         .number {
             position: absolute;
             font-size: 14px;
-            top: 20px;
-            left: 100px;
-            transform-origin: 50% 100%;
         }
     </style>
 </head>
@@ -157,7 +154,7 @@
         <div class="watch">
             <!-- Watch numbers -->
             <% for (var i = 1; i <= 12; i++) { %>
-                <div class="number" style="transform: rotateZ(<%= i * 30 %>deg)">
+                <div class="number" style="transform: rotateZ(<%= (i - 3) * 30 %>deg) translate(0, -90px)">
                     <%= i %>
                 </div>
             <% } %>
