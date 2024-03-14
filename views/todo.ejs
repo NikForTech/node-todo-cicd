@@ -1,111 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Todo List APP test</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                color: #333;
-                margin: 0;
-                padding: 0;
-            }
+<head>
+    <title>Todo List APP test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-            h1 {
-                background-color: #4CAF50;
-                color: white;
-                margin: 0;
-                padding: 20px;
-                text-align: center;
-            }
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
 
-            ul {
-                list-style: none;
-                padding: 0;
-            }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
-            ul li {
-                background: #fff;
-                border: 1px solid #ddd;
-                margin-bottom: 10px;
-                padding: 10px;
-                position: relative;
-            }
+        ul li {
+            background: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            position: relative;
+        }
 
-            ul li a {
-                color: #333;
-                text-decoration: none;
-                font-weight: bold;
-            }
+        ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-            ul li a:hover {
-                color: #4CAF50;
-            }
+        ul li a:hover {
+            color: #4CAF50;
+        }
 
-            .delete-btn {
-                color: red;
-                position: absolute;
-                right: 10px;
-                top: 10px;
-            }
+        .delete-btn {
+            color: red;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
 
-            .edit-btn {
-                color: #FFC107;
-                position: absolute;
-                right: 40px;
-                top: 10px;
-            }
+        .edit-btn {
+            color: #FFC107;
+            position: absolute;
+            right: 40px;
+            top: 10px;
+        }
 
-            form {
-                background: #fff;
-                padding: 20px;
-                margin-top: 20px;
-            }
+        form {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+        }
 
-            label {
-                display: block;
-                margin-bottom: 10px;
-            }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
 
-            input[type="text"] {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-            }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
 
-            input[type="submit"] {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                cursor: pointer;
-            }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
 
-            input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-        </style>
-    </head>
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
 
-    <body>
-        <h1>Third Change Trying After the Error</h1>
-        <ul>
-            <% todolist.forEach(function(todo, index) { %>
-            <li>
-                <a href="/todo/delete/<%= index %>" class="delete-btn">✘</a>
-                <a href="/todo/<%= index %>" class="edit-btn">✎</a>
-                <%- todo %>
-            </li>
-            <% }); %>
-        </ul>
+        /* Circular watch styles */
+        .watch-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .watch {
+            border: 8px solid #4CAF50; /* Green border */
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            position: relative;
+        }
+        .hour, .minute, .second {
+            position: absolute;
+            background: black;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+        }
+        .hour {
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: rotateZ(90deg);
+        }
+        .minute {
+            top: 10%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: rotateZ(90deg);
+        }
+        .second {
+            top: 10%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: rotateZ(90deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List APP test</h1>
+    <ul>
+        <% todolist.forEach(function(todo, index) { %>
+        <li>
+            <a href="/todo/delete/<%= index %>" class="delete-btn">✘</a>
+            <a href="/todo/<%= index %>" class="edit-btn">✎</a>
+            <%- todo %>
+        </li>
+        <% }); %>
+    </ul>
 
-        <form action="/todo/add/" method="post">
-            <p>
-                <label for="newtodo">What should I do?</label>
-                <input type="text" name="newtodo" id="newtodo" autofocus />
-                <input type="submit" value="Add" />
-            </p>
-        </form>
-    </body>
+    <form action="/todo/add/" method="post">
+        <p>
+            <label for="newtodo">What should I do?</label>
+            <input type="text" name="newtodo" id="newtodo" autofocus />
+            <input type="submit" value="Add" />
+        </p>
+    </form>
+
+    <div class="watch-container">
+        <div class="watch">
+            <div class="hour" id="hour"></div>
+            <div class="minute" id="minute"></div>
+            <div class="second" id="second"></div>
+        </div>
+    </div>
+
+    <script>
+        setInterval(updateWatch, 1000);
+
+        function updateWatch() {
+            const now = new Date();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+            const second = now.getSeconds();
+
+            const hourDeg = (hour % 12) * 30 + (minute / 60) * 30; // Each hour is 30deg
+            const minuteDeg = minute * 6; // Each minute is 6deg
+            const secondDeg = second * 6; // Each second is 6deg
+
+            document.getElementById("hour").style.transform = `rotate(${hourDeg}deg)`;
+            document.getElementById("minute").style.transform = `rotate(${minuteDeg}deg)`;
+            document.getElementById("second").style.transform = `rotate(${secondDeg}deg)`;
+        }
+    </script>
+</body>
 </html>
+
